@@ -1,0 +1,309 @@
+/* 스크롤 부드럽게 하기 */
+html {
+    scroll-behavior: smooth; /* 링크 클릭 시 부드럽게 스크롤되도록 설정 */
+}
+
+/* 배경 이미지 추가 */
+body {
+    background: url('../image/background.png') no-repeat center center fixed;
+    background-size: cover;
+    margin-top: 50px; /* 네비게이션 바와 첫 번째 섹션 사이 여백 */
+    padding-top: 60px; /* 네비게이션 바의 높이에 맞게 여백 추가 */
+    color: #000;  /* 글자 색을 검정색으로 설정 */
+}
+
+.community-section {
+    margin-top: 10px; /* 네비게이션 바와 커뮤니티 섹션 사이 여백 */
+}
+
+.community-section h2 {
+    margin-bottom: 30px; /* 커뮤니티 섹션 제목과 콘텐츠 사이 여백 */
+}
+
+footer {
+    margin-top: 40px; /* 푸터와 마지막 섹션 사이 여백 */
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+/* 'no-background' 클래스가 있을 때 배경 이미지 제거 */
+.no-background {
+    background: none !important;
+}
+
+/* 네비게이션 바 관련 */
+.navbar-brand img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 네비게이션 바 고정 */
+.navbar {
+    position: fixed; /* 스크롤해도 화면 상단에 고정 */
+    top: 0; /* 화면 상단에 위치 */
+    left: 0; /* 화면 왼쪽에 위치 */
+    width: 100%; /* 전체 너비 차지 */
+    z-index: 1000; /* 다른 콘텐츠보다 위에 표시되도록 설정 */
+}
+
+/* 서비스 상태 제목 스타일 */
+h2.text-center {
+    font-size: 2.5rem; /* 제목 글자 크기 증가 */
+    font-weight: bold; /* 굵게 설정 */
+    margin-bottom: 30px; /* 아래 여백 추가 */
+}
+
+
+/* 전체 컨테이너 */
+.status-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* 카드 스타일 */
+.status-card {
+    background-color: #2c2f33;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 서버 이름 스타일 */
+.status-card span:first-child {
+    font-size: 1.25rem; /* 글자 크기 증가 */
+    font-weight: bold; /* 굵게 설정 */
+    margin-bottom: 5px; /* 아래 여백 추가 */
+}
+
+
+.status-card h5 {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+/* 상태 색상 스타일 */
+.status-indicator {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.status-indicator.online {
+    color: #43b581;
+}
+
+.status-indicator.offline {
+    color: #f04747;
+}
+
+.status-indicator.maintenance {
+    color: #faa61a;
+}
+
+
+/* 서버 상태 버튼 스타일 추가 */
+.play-button {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #28a745;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.375rem 0.75rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin-left: 1rem;  /* 왼쪽 여백을 설정 */
+    margin-right: 1rem; /* 오른쪽 여백을 동일하게 설정 */
+}
+
+.play-button:hover {
+    color: #218838;
+    transform: scale(1.05);
+}
+
+.play-button:active {
+    color: #1e7e34;
+}
+
+/* 푸터 스타일 추가 */
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #ccc;
+}
+
+/* 커뮤니티 카드 스타일 */
+.community-card-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.community-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.community-card p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 디스코드 바로가기 버튼 디자인 */
+.discord-link {
+    display: inline-flex;
+    align-items: center;
+    background-color: #7289da;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.discord-link i {
+    margin-right: 10px;
+    font-size: 1.5rem; /* 디스코드 아이콘 크기 */
+    width: 1.5rem; /* 고정된 너비 */
+    height: 1.5rem; /* 고정된 높이 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discord-link:hover {
+    background-color: #5b6eae;
+    transform: scale(1.05);
+}
+
+.discord-link:active {
+    background-color: #4e5d89;
+}
+
+/* 카카오톡 바로가기 버튼 디자인 */
+.kakao-link {
+    display: inline-flex;
+    align-items: center;
+    background-color: #FFEB00; /* 카카오톡의 노란색 */
+    color: #3c1e1e; /* 카카오톡의 어두운 색 */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.kakao-link i {
+    margin-right: 10px;
+    font-size: 1.5rem; /* 디스코드 아이콘과 동일한 크기 */
+    width: 1.5rem; /* 고정된 너비 */
+    height: 1.5rem; /* 고정된 높이 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kakao-link img {
+    margin-right: 10px;
+    width: 30px; /* 아이콘 크기를 30px로 고정 */
+    height: 30px; /* 아이콘 크기를 30px로 고정 */
+}
+
+.kakao-link:hover {
+    background-color: #d4c700;
+    transform: scale(1.05);
+}
+
+.kakao-link:active {
+    background-color: #c3b200;
+}
+
+/* 각 내용 박스에 스크롤 마진 설정 (네비게이션 바의 높이를 고려) */
+.term-box[id] {
+    scroll-margin-top: 70px; /* 네비게이션 바의 높이에 맞게 여백 추가 */
+}
+
+/* 각 항목의 제목에 대해 스크롤 마진을 적용 */
+h3[id] {
+    scroll-margin-top: 70px; /* 네비게이션 바 높이에 맞게 여백 추가 */
+}
+
+/* 각 내용 박스 스타일 */
+.term-box {
+    background-color: rgba(224, 247, 250, 0.8);  /* 반투명 연한 회색 배경 */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd; /* 박스 테두리 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    color: #000000; /* 글자 색을 검정색으로 설정 */
+    margin-left: 20px; /* 왼쪽으로 약간 이동 */
+    max-width: calc(100% - 40px); /* 좌우 여백을 고려한 크기 */
+}
+
+/* 목차 박스 스타일 */
+.terms-nav-box {
+    position: sticky; /* 스크롤 시 따라오는 방식 */
+    top: 50%; /* 화면 Y축 기준으로 중앙에 위치 */
+    transform: translateY(-50%); /* 정확한 중앙 위치를 위해 50%만큼 위로 이동 */
+    background-color: transparent; /* 배경색을 투명으로 설정 */
+    padding: 20px;
+    border-radius: 8px;
+    border: none; /* 테두리 제거 */
+    box-shadow: none; /* 그림자 제거 */
+    color: #000; /* 글자 색을 검정색으로 설정 */
+    max-width: 200px; /* 목차 박스의 너비를 줄임 */
+    margin-left: 20px; /* 왼쪽으로 약간 이동 */
+}
+
+
+/* 목차 링크 스타일 */
+.terms-nav-box .nav-link {
+    color: #000; /* 기본 링크 색상 검정색 */
+    font-weight: normal;
+    text-decoration: none;
+    transition: color 0.3s ease; /* 부드러운 색상 변화 효과 */
+}
+
+/* 링크에 마우스를 올렸을 때 스타일 */
+.terms-nav-box .nav-link:hover {
+    color: #007bff; /* 마우스를 올렸을 때 파란색으로 강조 */
+    text-decoration: underline; /* 밑줄 추가 */
+}
+
+/* 링크 클릭 후 스타일 */
+.terms-nav-box .nav-link:active {
+    color: #0056b3; /* 클릭 시 색상 */
+}
+
+
+/* 각 내용 박스에 마지막 문단에 구분선 추가 */
+.term-divider {
+    border-top: 5px solid #000000; /* 애플 스타일처럼 진한 구분선 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

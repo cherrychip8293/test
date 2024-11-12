@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블록팜 서비스 상태</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="image/home.GIF" alt="이슬비 프로젝트">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="status.html">서버 상태</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rule.html">서버 규칙</a>
+                </li>
+            </ul>
+            <a href="minecraft://?addExternalServer=이슬비 서버|blockf.kr:19132" class="play-button ms-auto">서버 플레이</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h2 class="text-center">서비스 상태</h2>
+
+    <div class="status-container">
+        <div class="status-card" id="card-proxy">
+            <h5>프록시</h5>
+            <span id="status-proxy" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-spawn">
+            <h5>스폰</h5>
+            <span id="status-spawn" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-mining">
+            <h5>광산</h5>
+            <span id="status-mining" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-island">
+            <h5>섬</h5>
+            <span id="status-island" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-tutorial">
+            <h5>튜토리얼</h5>
+            <span id="status-tutorial" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-afk">
+            <h5>잠수</h5>
+            <span id="status-afk" class="status-indicator">● 확인 중...</span>
+        </div>
+        <div class="status-card" id="card-lobby">
+            <h5>로비</h5>
+            <span id="status-lobby" class="status-indicator">● 확인 중...</span>
+        </div>
+    </div>
+
+    <footer class="mt-5 text-center">
+        <p>© 2024 Cloud Studio all rights reserved.</p>
+        <p>마지막 갱신: <span id="last-updated">로딩 중...</span></p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const servers = {
+        proxy: { name: "프록시", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19132" },
+        spawn: { name: "스폰", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19133" },
+        mining: { name: "광산", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19134" },
+        island: { name: "섬", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19135" },
+        tutorial: { name: "튜토리얼", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19136" },
+        afk: { name: "잠수", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19137" },
+        lobby: { name: "로비", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19140" }
+    };
+
+    function updateStatus(id, online, maintenance = false) {
+        const statusElement = document.getElementById(`status-${id}`);
+        if (maintenance) {
+            statusElement.textContent = "● 점검 중";
+            statusElement.classList.add("maintenance");
+            statusElement.classList.remove("online", "offline");
+        } else if (online) {
+            statusElement.textContent = "● 서비스 중";
+            statusElement.classList.add("online");
+            statusElement.classList.remove("offline", "maintenance");
+        } else {
+            statusElement.textContent = "● 오프라인";
+            statusElement.classList.add("offline");
+            statusElement.classList.remove("online", "maintenance");
+        }
+    }
+
+    async function checkServerStatus(id, url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("서버 상태를 불러올 수 없습니다.");
+            const data = await response.json();
+            const online = data.online || data.status === "ok";
+            const maintenance = data.whitelisted || !online;
+            updateStatus(id, online, maintenance);
+        } catch (error) {
+            updateStatus(id, false);
+        }
+    }
+
+    function updateAllStatuses() {
+        for (const [id, server] of Object.entries(servers)) {
+            checkServerStatus(id, server.url);
+        }
+        const now = new Date();
+        document.getElementById("last-updated").textContent = now.toLocaleString();
+    }
+
+    updateAllStatuses();
+    setInterval(updateAllStatuses, 60000);
+</script>
+
+</body>
+</html>
