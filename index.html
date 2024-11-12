@@ -11,7 +11,7 @@
 <body>
 
 <!-- 네비게이션 바 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.html">
       <img src="image/home.GIF" alt="이슬비 프로젝트">
@@ -28,8 +28,11 @@
           <a class="nav-link" href="rule.html">서버 규칙</a>
         </li>
       </ul>
-      <!-- 플레이 버튼을 오른쪽 끝으로 배치 -->
-      <a href="minecraft://?addExternalServer=이슬비 서버|blockf.kr:19132" class="play-button ms-auto">서버 플레이</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="minecraft://?addExternalServer=이슬비 서버|blockf.kr:19132" class="play-button">서버 접속</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -39,8 +42,8 @@
   <h2 class="text-center">커뮤니티</h2>
   <div class="row justify-content-center">
     <!-- 디스코드 바로가기 카드 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="community-card">
+    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-3">
+      <div class="community-card text-center">
         <h4><i class="fab fa-discord"></i> 디스코드</h4>
         <p>공지 확인은 디스코드를 통해 해주세요</p>
         <a href="https://discord.gg/example" target="_blank" class="discord-link">
@@ -49,8 +52,8 @@
       </div>
     </div>
     <!-- 카카오톡 바로가기 카드 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="community-card">
+    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-3">
+      <div class="community-card text-center">
         <h4>카카오톡 오픈채팅</h4>
         <p>플레이어들과 실시간으로 소통해보세요</p>
         <a href="https://open.kakao.com/o/example" target="_blank" class="kakao-link">

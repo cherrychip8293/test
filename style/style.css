@@ -12,6 +12,15 @@ body {
     color: #000;  /* 글자 색을 검정색으로 설정 */
 }
 
+.community-card {
+    width: 100%; /* 카드의 가로폭을 100%로 설정 */
+    max-width: 350px; /* 카드의 최대 가로폭 제한 */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .community-section {
     margin-top: 10px; /* 네비게이션 바와 커뮤니티 섹션 사이 여백 */
 }
@@ -49,13 +58,19 @@ footer {
     z-index: 1000; /* 다른 콘텐츠보다 위에 표시되도록 설정 */
 }
 
+/* 네비게이션 바 관련 */
+.navbar-nav {
+    display: flex; /* 메뉴 항목들을 가로로 나열 */
+    align-items: center; /* 항목들을 수직 중앙 정렬 */
+    padding-left: 0;
+}
+
 /* 서비스 상태 제목 스타일 */
 h2.text-center {
     font-size: 2.5rem; /* 제목 글자 크기 증가 */
     font-weight: bold; /* 굵게 설정 */
     margin-bottom: 30px; /* 아래 여백 추가 */
 }
-
 
 /* 전체 컨테이너 */
 .status-container {
@@ -82,7 +97,6 @@ h2.text-center {
     margin-bottom: 5px; /* 아래 여백 추가 */
 }
 
-
 .status-card h5 {
     margin-bottom: 10px;
     font-size: 1.25rem;
@@ -107,7 +121,7 @@ h2.text-center {
 }
 
 
-/* 서버 상태 버튼 스타일 추가 */
+/* 서버 플레이 버튼 스타일 */
 .play-button {
     display: inline-block;
     font-size: 1rem;
@@ -119,8 +133,7 @@ h2.text-center {
     text-decoration: none;
     padding: 0.375rem 0.75rem;
     transition: color 0.3s ease, transform 0.2s ease;
-    margin-left: 1rem;  /* 왼쪽 여백을 설정 */
-    margin-right: 1rem; /* 오른쪽 여백을 동일하게 설정 */
+    align-self: center; /* 버튼을 네비게이션 항목들과 세로로 정렬 */
 }
 
 .play-button:hover {
@@ -280,7 +293,6 @@ h3[id] {
     margin-left: 20px; /* 왼쪽으로 약간 이동 */
 }
 
-
 /* 목차 링크 스타일 */
 .terms-nav-box .nav-link {
     color: #000; /* 기본 링크 색상 검정색 */
@@ -295,15 +307,20 @@ h3[id] {
     text-decoration: underline; /* 밑줄 추가 */
 }
 
-/* 링크 클릭 후 스타일 */
-.terms-nav-box .nav-link:active {
-    color: #0056b3; /* 클릭 시 색상 */
+/* 기본 스타일에서 목차 박스를 숨기도록 설정 */
+@media (max-width: 768px) {
+    .terms-nav-box {
+        display: none; /* 모바일 화면에서 목차 박스를 숨깁니다 */
+    }
 }
 
+/* 데스크탑 화면에서 서버 플레이 버튼 오른쪽 정렬 */
+@media (min-width: 769px) {
+    .d-flex {
+        justify-content: space-between; /* 메뉴 항목과 버튼 사이에 공간을 추가 */
+    }
 
-/* 각 내용 박스에 마지막 문단에 구분선 추가 */
-.term-divider {
-    border-top: 5px solid #000000; /* 애플 스타일처럼 진한 구분선 */
-    margin-top: 20px;
-    margin-bottom: 20px;
+    .play-button {
+        margin-left: auto; /* 서버 플레이 버튼을 오른쪽 끝으로 밀어냄 */
+    }
 }
