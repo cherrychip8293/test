@@ -33,6 +33,7 @@
 
 <div class="container my-5">
     <h2 class="text-center">서비스 상태</h2>
+    <p class="text-white text-end">마지막 갱신: <span id="last-updated">로딩 중...</span></p>
 
     <div class="status-container">
         <div class="status-card" id="card-proxy">
@@ -65,65 +66,67 @@
         </div>
     </div>
 
-    <footer class="mt-5 text-center">
-        <p>© 2024 Cloud Studio all rights reserved.</p>
-        <p>마지막 갱신: <span id="last-updated">로딩 중...</span></p>
+    <!-- 푸터 -->
+    <footer class="footer">
+        <p>상호명: 이슬비 프로젝트 | 사업자등록번호: 526-43-00789 | 통신판매번호: 2022-대전대덕-0460</p>
+        <p>대표: 백경우</p>
+        <p>&copy Copyright 2024. Cloud Studio All rights reserved.</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const servers = {
+            proxy: { name: "프록시", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19132" },
+            spawn: { name: "스폰", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19133" },
+            mining: { name: "광산", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19134" },
+            island: { name: "섬", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19135" },
+            tutorial: { name: "튜토리얼", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19136" },
+            afk: { name: "잠수", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19137" },
+            lobby: { name: "로비", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19140" }
+        };
+
+        function updateStatus(id, online, maintenance = false) {
+            const statusElement = document.getElementById(`status-${id}`);
+            if (maintenance) {
+                statusElement.textContent = "● 점검 중";
+                statusElement.classList.add("maintenance");
+                statusElement.classList.remove("online", "offline");
+            } else if (online) {
+                statusElement.textContent = "● 서비스 중";
+                statusElement.classList.add("online");
+                statusElement.classList.remove("offline", "maintenance");
+            } else {
+                statusElement.textContent = "● 오프라인";
+                statusElement.classList.add("offline");
+                statusElement.classList.remove("online", "maintenance");
+            }
+        }
+
+        async function checkServerStatus(id, url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("서버 상태를 불러올 수 없습니다.");
+                const data = await response.json();
+                const online = data.online || data.status === "ok";
+                const maintenance = data.whitelisted || !online;
+                updateStatus(id, online, maintenance);
+            } catch (error) {
+                updateStatus(id, false);
+            }
+        }
+
+        function updateAllStatuses() {
+            for (const [id, server] of Object.entries(servers)) {
+                checkServerStatus(id, server.url);
+            }
+            const now = new Date();
+            document.getElementById("last-updated").textContent = now.toLocaleString();
+        }
+
+        updateAllStatuses();
+        setInterval(updateAllStatuses, 60000);
+    </script>
+
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const servers = {
-        proxy: { name: "프록시", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19132" },
-        spawn: { name: "스폰", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19133" },
-        mining: { name: "광산", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19134" },
-        island: { name: "섬", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19135" },
-        tutorial: { name: "튜토리얼", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19136" },
-        afk: { name: "잠수", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19137" },
-        lobby: { name: "로비", url: "https://api.mcstatus.io/v2/status/bedrock/blockf.kr:19140" }
-    };
-
-    function updateStatus(id, online, maintenance = false) {
-        const statusElement = document.getElementById(`status-${id}`);
-        if (maintenance) {
-            statusElement.textContent = "● 점검 중";
-            statusElement.classList.add("maintenance");
-            statusElement.classList.remove("online", "offline");
-        } else if (online) {
-            statusElement.textContent = "● 서비스 중";
-            statusElement.classList.add("online");
-            statusElement.classList.remove("offline", "maintenance");
-        } else {
-            statusElement.textContent = "● 오프라인";
-            statusElement.classList.add("offline");
-            statusElement.classList.remove("online", "maintenance");
-        }
-    }
-
-    async function checkServerStatus(id, url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("서버 상태를 불러올 수 없습니다.");
-            const data = await response.json();
-            const online = data.online || data.status === "ok";
-            const maintenance = data.whitelisted || !online;
-            updateStatus(id, online, maintenance);
-        } catch (error) {
-            updateStatus(id, false);
-        }
-    }
-
-    function updateAllStatuses() {
-        for (const [id, server] of Object.entries(servers)) {
-            checkServerStatus(id, server.url);
-        }
-        const now = new Date();
-        document.getElementById("last-updated").textContent = now.toLocaleString();
-    }
-
-    updateAllStatuses();
-    setInterval(updateAllStatuses, 60000);
-</script>
-
 </body>
 </html>

@@ -35,13 +35,6 @@ body {
     margin-bottom: 30px; /* 커뮤니티 섹션 제목과 콘텐츠 사이 여백 */
 }
 
-footer {
-    margin-top: 40px; /* 푸터와 마지막 섹션 사이 여백 */
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-
 /* 'no-background' 클래스가 있을 때 배경 이미지 제거 */
 .no-background {
     background: none !important;
@@ -158,11 +151,34 @@ h2.text-center {
     transform: scale(1.1) translateY(-5px); /* 버튼 크기를 1.1배로 키우고 위로 5px 이동 */
 }
 
-/* 푸터 스타일 추가 */
-footer {
-    margin-top: 30px;
+/* 푸터 기본 스타일 */
+.footer {
+    background-color: #333; /* 푸터 배경색 */
+    color: #fff; /* 텍스트 색상 */
+    font-size: 0.9rem; /* 폰트 크기 */
+    padding: 40px 0 20px 0; /* 위쪽 여백 40px, 아래쪽 여백 20px */
     text-align: center;
-    color: #ccc;
+    position: relative; /* 푸터가 내용 끝에 맞춰지도록 설정 */
+    bottom: 0; /* 화면 하단에 위치 */
+    left: 0; /* 화면 왼쪽 끝에 위치 */
+    width: 100%; /* 전체 너비 차지 */
+    z-index: 1000; /* 다른 콘텐츠 위에 위치 */
+    border-radius: 50px; /* 모든 모서리를 둥글게 */
+    margin-top: 50px; /* 푸터와 내용 사이에 간격 추가 */
+}
+
+/* 푸터 내용 스타일 */
+.footer-content p {
+    margin: 5px 0; /* 각 문단 간 간격 */
+    line-height: 1.5; /* 줄 간격 설정 */
+}
+
+/* 마지막 갱신 표시 스타일 */
+.last-updated {
+    color: #f9f9f9;
+    text-align: right;
+    margin-bottom: 30px; /* 푸터와의 간격을 띄우기 위해 여백 추가 */
+    font-size: 1rem;
 }
 
 /* 아이콘 컨테이너 스타일 */
@@ -264,17 +280,6 @@ h3[id] {
     }
 }
 
-/* 데스크탑 화면에서 서버 플레이 버튼 오른쪽 정렬 */
-@media (min-width: 769px) {
-    .d-flex {
-        justify-content: space-between; /* 메뉴 항목과 버튼 사이에 공간을 추가 */
-    }
-
-    .play-button {
-        margin-left: auto; /* 서버 플레이 버튼을 오른쪽 끝으로 밀어냄 */
-    }
-}
-
 /* 모바일에서 아이콘 크기 조정 */
 @media (max-width: 576px) {
     .icon-image {
@@ -284,6 +289,13 @@ h3[id] {
     .minelist-icon {
         width: 40px;
         height: 40px;
+    }
+    .footer {
+        font-size: 0.8rem; /* 모바일에서 폰트 크기 줄임 */
+    }
+
+    .footer-content {
+        padding: 15px; /* 모바일에서 패딩 줄임 */
     }
 }
 
