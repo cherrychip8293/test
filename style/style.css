@@ -3,6 +3,12 @@ html {
     scroll-behavior: smooth; /* 링크 클릭 시 부드럽게 스크롤되도록 설정 */
 }
 
+/* li 앞의 기본 기호 제거 */
+ul {
+    list-style-type: none; /* 기본 기호 제거 */
+    padding-left: 0; /* 왼쪽 여백 제거 */
+}
+
 /* 배경 이미지 추가 */
 body {
     background: url('../image/background.png') no-repeat center center fixed;
@@ -120,29 +126,36 @@ h2.text-center {
     color: #faa61a;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
 
-/* 서버 플레이 버튼 스타일 */
+.main-image {
+    max-width: 30%;
+    height: auto; /* 이미지 비율 유지 */
+}
+
+.play-button-container {
+    display: block; /* 컨테이너 항상 표시 */
+    text-align: center;
+    margin-top: 10px;
+}
+
 .play-button {
     display: inline-block;
-    font-size: 1rem;
-    font-weight: normal;
-    color: #28a745;
-    background-color: transparent;
-    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     text-align: center;
+    border-radius: 5px;
     text-decoration: none;
-    padding: 0.375rem 0.75rem;
-    transition: color 0.3s ease, transform 0.2s ease;
-    align-self: center; /* 버튼을 네비게이션 항목들과 세로로 정렬 */
+    transition: transform 0.3s ease; /* 부드러운 전환 효과 */
 }
 
 .play-button:hover {
-    color: #218838;
-    transform: scale(1.05);
-}
-
-.play-button:active {
-    color: #1e7e34;
+    transform: scale(1.1) translateY(-5px); /* 버튼 크기를 1.1배로 키우고 위로 5px 이동 */
 }
 
 /* 푸터 스타일 추가 */
@@ -152,107 +165,39 @@ footer {
     color: #ccc;
 }
 
-/* 커뮤니티 카드 스타일 */
-.community-card-wrapper {
+/* 아이콘 컨테이너 스타일 */
+.icon-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    gap: 20px; /* 아이콘 간 간격 */
+    margin-top: 20px;
 }
 
-.community-card {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.icon-link {
+    display: inline-block;
+    width: 100px; /* 아이콘의 크기 */
+    height: 100px; /* 아이콘의 크기 */
+    overflow: hidden; /* 이미지가 넘치는 부분을 잘라내기 */
+    transition: transform 0.3s ease; /* 부드러운 전환 효과 */
 }
 
-.community-card h4 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+.minelist-icon { /*마리 아이콘 자체 이슈로 별도로 분리*/
+    display: inline-block;
+    width: 100px; /* 아이콘의 크기 */
+    height: 100px; /* 아이콘의 크기 */
+    border-radius: 50%; /* 동그랗게 만들기 */
+    overflow: hidden; /* 이미지가 넘치는 부분을 잘라내기 */
 }
 
-.community-card p {
-    font-size: 1rem;
-    margin-bottom: 15px;
+.icon-image {
+    width: 100%; /* 아이콘 크기 맞추기 */
+    height: 100%; /* 아이콘 크기 맞추기 */
+    object-fit: cover; /* 이미지가 잘리더라도 비율을 맞추기 */
 }
 
-.community-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* 디스코드 바로가기 버튼 디자인 */
-.discord-link {
-    display: inline-flex;
-    align-items: center;
-    background-color: #7289da;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.discord-link i {
-    margin-right: 10px;
-    font-size: 1.5rem; /* 디스코드 아이콘 크기 */
-    width: 1.5rem; /* 고정된 너비 */
-    height: 1.5rem; /* 고정된 높이 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.discord-link:hover {
-    background-color: #5b6eae;
-    transform: scale(1.05);
-}
-
-.discord-link:active {
-    background-color: #4e5d89;
-}
-
-/* 카카오톡 바로가기 버튼 디자인 */
-.kakao-link {
-    display: inline-flex;
-    align-items: center;
-    background-color: #FFEB00; /* 카카오톡의 노란색 */
-    color: #3c1e1e; /* 카카오톡의 어두운 색 */
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.kakao-link i {
-    margin-right: 10px;
-    font-size: 1.5rem; /* 디스코드 아이콘과 동일한 크기 */
-    width: 1.5rem; /* 고정된 너비 */
-    height: 1.5rem; /* 고정된 높이 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.kakao-link img {
-    margin-right: 10px;
-    width: 30px; /* 아이콘 크기를 30px로 고정 */
-    height: 30px; /* 아이콘 크기를 30px로 고정 */
-}
-
-.kakao-link:hover {
-    background-color: #d4c700;
-    transform: scale(1.05);
-}
-
-.kakao-link:active {
-    background-color: #c3b200;
+/* 마우스를 올렸을 때 아이콘 효과 */
+.icon-link:hover {
+    transform: scale(1.2) translateY(-10px); /* 아이콘 크기를 1.2배로 키우고 위로 10px 이동 */
 }
 
 /* 각 내용 박스에 스크롤 마진 설정 (네비게이션 바의 높이를 고려) */
@@ -285,12 +230,17 @@ h3[id] {
     transform: translateY(-50%); /* 정확한 중앙 위치를 위해 50%만큼 위로 이동 */
     background-color: transparent; /* 배경색을 투명으로 설정 */
     padding: 20px;
+    text-align: left;
     border-radius: 8px;
     border: none; /* 테두리 제거 */
     box-shadow: none; /* 그림자 제거 */
     color: #000; /* 글자 색을 검정색으로 설정 */
     max-width: 200px; /* 목차 박스의 너비를 줄임 */
     margin-left: 20px; /* 왼쪽으로 약간 이동 */
+}
+
+.terms-nav-title {
+    padding-left: 15px;  /* '목차' 제목에만 왼쪽 여백 추가 */
 }
 
 /* 목차 링크 스타일 */
