@@ -1,6 +1,5 @@
-/* 스크롤 부드럽게 하기 */
+/* HTML과 Body는 전체 높이를 차지 */
 html {
-    scroll-behavior: smooth; /* 링크 클릭 시 부드럽게 스크롤되도록 설정 */
     height: 100%;
     margin: 0;
 }
@@ -10,7 +9,7 @@ body {
     display: flex;
     height: 100%;
     margin: 0;
-    padding-top: 50px;
+    padding-top: 5px;
     flex-direction: column;
     justify-content: space-between; /* 푸터를 항상 하단에 고정 */
     background: url('../image/background.png') no-repeat center center fixed;
@@ -39,6 +38,15 @@ body {
     text-align: center;
     padding: 20px 0;
     width: 100%; /* 전체 너비 차지 */
+}
+
+/* 서비스 상태 제목 스타일 */
+h2.text-center {
+    font-size: 2.5rem; /* 제목 글자 크기 증가 */
+    font-weight: bold; /* 굵게 설정 */
+    margin-top: 70px; /* 네비게이션 바 높이(60px) + 추가 여백(10px) */
+    margin-bottom: 20px; /* 아래 여백 설정 */
+    text-align: center; /* 중앙 정렬 */
 }
 
 /* 네비게이션 바 관련 */
@@ -75,101 +83,95 @@ body {
     padding-left: 0;
 }
 
-.main-container {
+/* 카드 컨테이너 중앙 정렬 */
+.status-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5px;
+    flex-wrap: wrap;
+    justify-content: center; /* 가로 중앙 정렬 */
+    gap: 20px;
 }
 
-.main-image {
-    max-width: 30%;
-    height: auto; /* 이미지 비율 유지 */
-}
-
-.play-button-container {
-    display: block; /* 컨테이너 항상 표시 */
+/* 카드 스타일 */
+.status-card {
+    background-color: #2c2f33;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top: 10px;
+    width: 250px;
 }
 
-.play-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
+/* 카드 스타일 */
+.status-card {
+    background-color: #2c2f33;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: transform 0.3s ease; /* 부드러운 전환 효과 */
 }
 
-.play-button:hover {
-    transform: scale(1.1) translateY(-5px); /* 버튼 크기를 1.1배로 키우고 위로 5px 이동 */
+.status-card h5 {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
 }
 
-.server-info {
-    color: #ffffff;
-    padding: 10px;
-    font-size: 0.8rem;
+/* 상태 색상 스타일 */
+.status-indicator {
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
-
-/* 푸터 기본 스타일 */
-.footer {
-    background-color: #333; /* 푸터 배경색 */
-    color: #fff; /* 텍스트 색상 */
-    font-size: 0.9rem; /* 폰트 크기 */
-    padding: 40px 0 20px 0; /* 위쪽 여백 40px, 아래쪽 여백 20px */
-    text-align: left;
-    position: relative; /* 푸터가 내용 끝에 맞춰지도록 설정 */
-    top: 90px;
-    bottom: 0; /* 화면 하단에 위치 */
-    left: 0; /* 화면 왼쪽 끝에 위치 */
-    width: 100%; /* 전체 너비 차지 */
-    z-index: 1000; /* 다른 콘텐츠 위에 위치 */
-    margin-top: 50px; /* 푸터와 내용 사이에 간격 추가 */
+.status-indicator.online {
+    color: #43b581;
 }
 
-/* 아이콘 컨테이너 스타일 */
-.icon-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* 아이콘 간 간격 */
-    margin-top: 50px;
+.status-indicator.offline {
+    color: #f04747;
 }
 
-.icon-link {
-    display: inline-block;
-    width: 100px; /* 아이콘의 크기 */
-    height: 100px; /* 아이콘의 크기 */
-    overflow: hidden; /* 이미지가 넘치는 부분을 잘라내기 */
-    transition: transform 0.3s ease; /* 부드러운 전환 효과 */
-}
-
-.icon-image {
-    width: 100%; /* 아이콘 크기 맞추기 */
-    height: 8vh; /* 아이콘 크기 맞추기 */
-    border-radius: 50%;
-    object-fit: cover; /* 이미지가 잘리더라도 비율을 맞추기 */
-    -webkit-user-drag: none;
-}
-
-/* 마우스를 올렸을 때 아이콘 효과 */
-.icon-link:hover {
-    transform: scale(1.2) translateY(-10px); /* 아이콘 크기를 1.2배로 키우고 위로 10px 이동 */
-}
-
-/* 각 내용 박스에 스크롤 마진 설정 (네비게이션 바의 높이를 고려) */
-.term-box[id] {
-    scroll-margin-top: 70px; /* 네비게이션 바의 높이에 맞게 여백 추가 */
-}
-
-/* 각 항목의 제목에 대해 스크롤 마진을 적용 */
-h3[id] {
-    scroll-margin-top: 70px; /* 네비게이션 바 높이에 맞게 여백 추가 */
+.status-indicator.maintenance {
+    color: #faa61a;
 }
 
 @media (max-width: 768px) {
+    .terms-nav-box {
+        display: none;
+    }
+
+    .navbar {
+        justify-content: flex-start;
+    }
+
+    .navbar-brand {
+        justify-content: flex-start;
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .icon-image, .minelist-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footer {
+        font-size: 0.875rem;
+    }
+
+    .footer-content {
+        padding: 15px;
+    }
+}
+
+/* 기본 스타일에서 목차 박스를 숨기도록 설정 */
+@media (max-width: 768px) {
+    .terms-nav-box {
+        display: none; /* 모바일 화면에서 목차 박스를 숨깁니다 */
+    }
     .navbar {
         display: flex;
         justify-content: flex-start; /* 로고와 메뉴를 왼쪽 정렬 */
@@ -226,13 +228,5 @@ h3[id] {
 
     .footer-content {
         padding: 15px; /* 모바일에서 패딩 줄임 */
-    }
-}
-
-/* 데스크탑에서 아이콘 크기 조정 */
-@media (min-width: 577px) {
-    .icon-image {
-        width: 70px; /* 데스크탑에서 아이콘 크기 */
-        height: 70px;
     }
 }
