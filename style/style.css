@@ -41,9 +41,18 @@ body {
 }
 
 /* 네비게이션 바 관련 */
+.navbar-brand {
+    margin: 0 auto; /* 네비게이션 아이템을 중앙 정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .navbar-brand img {
-    height: 40px;
-    width: 40px;
+    padding-left: 2px; /* 왼쪽 여백 조정 */
+    padding-right: 5px; /* 오른쪽 여백 추가 */
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -55,6 +64,7 @@ body {
     left: 0; /* 화면 왼쪽에 위치 */
     width: 100%; /* 전체 너비 차지 */
     z-index: 1000; /* 다른 콘텐츠보다 위에 표시되도록 설정 */
+    color: white;
 }
 
 /* 네비게이션 바 관련 */
@@ -151,27 +161,27 @@ h2.text-center {
     transform: scale(1.1) translateY(-5px); /* 버튼 크기를 1.1배로 키우고 위로 5px 이동 */
 }
 
+.server-info {
+    color: #ffffff;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
 /* 푸터 기본 스타일 */
 .footer {
     background-color: #333; /* 푸터 배경색 */
     color: #fff; /* 텍스트 색상 */
     font-size: 0.9rem; /* 폰트 크기 */
     padding: 40px 0 20px 0; /* 위쪽 여백 40px, 아래쪽 여백 20px */
-    text-align: center;
+    text-align: left;
     position: relative; /* 푸터가 내용 끝에 맞춰지도록 설정 */
     bottom: 0; /* 화면 하단에 위치 */
     left: 0; /* 화면 왼쪽 끝에 위치 */
     width: 100%; /* 전체 너비 차지 */
     z-index: 1000; /* 다른 콘텐츠 위에 위치 */
-    border-radius: 50px; /* 모든 모서리를 둥글게 */
     margin-top: 50px; /* 푸터와 내용 사이에 간격 추가 */
 }
 
-/* 푸터 내용 스타일 */
-.footer-content p {
-    margin: 5px 0; /* 각 문단 간 간격 */
-    line-height: 1.5; /* 줄 간격 설정 */
-}
 
 /* 마지막 갱신 표시 스타일 */
 .last-updated {
@@ -197,18 +207,12 @@ h2.text-center {
     transition: transform 0.3s ease; /* 부드러운 전환 효과 */
 }
 
-.minelist-icon { /*마리 아이콘 자체 이슈로 별도로 분리*/
-    display: inline-block;
-    width: 100px; /* 아이콘의 크기 */
-    height: 100px; /* 아이콘의 크기 */
-    border-radius: 50%; /* 동그랗게 만들기 */
-    overflow: hidden; /* 이미지가 넘치는 부분을 잘라내기 */
-}
-
 .icon-image {
     width: 100%; /* 아이콘 크기 맞추기 */
-    height: 100%; /* 아이콘 크기 맞추기 */
+    height: 8vh; /* 아이콘 크기 맞추기 */
+    border-radius: 50%;
     object-fit: cover; /* 이미지가 잘리더라도 비율을 맞추기 */
+    -webkit-user-drag: none;
 }
 
 /* 마우스를 올렸을 때 아이콘 효과 */
@@ -277,6 +281,43 @@ h3[id] {
 @media (max-width: 768px) {
     .terms-nav-box {
         display: none; /* 모바일 화면에서 목차 박스를 숨깁니다 */
+    }
+    .navbar {
+        display: flex;
+        justify-content: flex-start; /* 로고와 메뉴를 왼쪽 정렬 */
+        align-items: center;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* 로고를 왼쪽 정렬 */
+        margin-left: 0.01rem;
+        font-size: 1.25rem;
+    }
+
+    .navbar-brand img {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* 네비게이션 메뉴 왼쪽 정렬 */
+    .navbar-nav {
+        display: flex;
+        justify-content: flex-start; /* 메뉴 항목들을 왼쪽 정렬 */
+        align-items: center;
+        width: auto;
+    }
+
+    .nav-item {
+        margin-right: 540px;
+    }
+
+    /* 메뉴 버튼은 그대로 중앙으로 두기 */
+    .navbar-toggler {
+        margin-left: auto; /* 메뉴 버튼을 오른쪽 끝에 위치시킴 */
     }
 }
 
