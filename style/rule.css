@@ -17,6 +17,16 @@ body {
     color: #000; /* 글자 색 설정 */
 }
 
+/* 특정 리스트에서만 구분 기호 제거 */
+#serviceList {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#serviceList li {
+    /* 필요에 따라 추가 스타일 작성 */
+}
+
 /* 각 내용 박스 스타일 */
 .term-box {
     background-color: rgba(224, 247, 250, 0.8);  /* 반투명 연한 회색 배경 */

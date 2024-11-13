@@ -103,17 +103,6 @@ h2.text-center {
     width: 250px;
 }
 
-/* 카드 스타일 */
-.status-card {
-    background-color: #2c2f33;
-    font-size: 1.5rem;
-    color: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
 .status-card h5 {
     margin-bottom: 10px;
     font-size: 1.25rem;
@@ -138,10 +127,6 @@ h2.text-center {
 }
 
 @media (max-width: 768px) {
-    .terms-nav-box {
-        display: none;
-    }
-
     .navbar {
         justify-content: flex-start;
     }
@@ -153,10 +138,6 @@ h2.text-center {
 }
 
 @media (max-width: 576px) {
-    .icon-image, .minelist-icon {
-        width: 40px;
-        height: 40px;
-    }
 
     .footer {
         font-size: 0.875rem;
@@ -169,9 +150,6 @@ h2.text-center {
 
 /* 기본 스타일에서 목차 박스를 숨기도록 설정 */
 @media (max-width: 768px) {
-    .terms-nav-box {
-        display: none; /* 모바일 화면에서 목차 박스를 숨깁니다 */
-    }
     .navbar {
         display: flex;
         justify-content: flex-start; /* 로고와 메뉴를 왼쪽 정렬 */
@@ -214,16 +192,8 @@ h2.text-center {
 
 /* 모바일에서 아이콘 크기 조정 */
 @media (max-width: 576px) {
-    .icon-image {
-        width: 40px; /* 모바일에서 아이콘 크기 축소 */
-        height: 40px;
-    }
-    .minelist-icon {
-        width: 40px;
-        height: 40px;
-    }
     .footer {
-        font-size: 0.rem; /* 모바일에서 폰트 크기 줄임 */
+        font-size: 0; /* 모바일에서 폰트 크기 줄임 */
     }
 
     .footer-content {

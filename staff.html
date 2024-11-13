@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Skin Preview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/staff.css">
+</head>
+<body>
+<!-- 기존 카드 컨테이너 -->
+<div class="card-container" id="wallpaperPreviews"></div>
+
+
+<div class="card-sections">
+    <h2 class="text-center text-center-wrapper">
+        운영진 소개
+    </h2>
+    <div class="card-container" id="operatorSection"></div>
+    <h2 class="text-center text-center-wrapper">
+        개발진 소개
+    </h2>
+    <div class="card-container" id="developerSection"></div>
+</div>
+
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg bg-white fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="image/icon.png" alt="아이콘" height="30" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="status.html">서버 상태</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rule.html">서버 약관</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="staff.html">운영진 소개
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- 푸터 -->
+<footer class="bg-dark mt-auto">
+    <div class="container-fluid p-4" id="footerContainer">
+        <p>상호명: 이슬비 프로젝트 | 사업자등록번호: 526-43-00789 | 통신판매번호: 2022-대전대덕-0460 | 대표: 백경우</p>
+        <p>&copy Copyright 2024. Cloud Studio All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sections = {
+            operatorSection: [
+                { xuid: "2535408743945351", text: "체리칩\n@cherrychip4512\n\\b총 관리자" },
+                { xuid: "2535459744467696", text: "로모\n@bulpaul\n\\b운영자, 개발자" },
+            ],
+            developerSection: [
+                { xuid: "2535426155608265", text: "넹\n@SleepySoong\n\\b플러그인 개발자" },
+                { xuid: "2535431292432197", text: "현재\n@KimPresent\n\\b플러그인 개발자"},
+                { xuid: "2535468992642675", text: "아마\n@iMasterProX\n\\b리소스팩 개발자"},
+                { xuid: "2535465656320983", text: "루나\n@NeroLuna\n\\b리소스팩 개발자" },
+            ],
+            adminSection: [
+                { xuid: "2535461882301178", text: "관리자 1" },
+                { xuid: "2535461882301179", text: "관리자 2" },
+                { xuid: "2535461882301180", text: "관리자 3" },
+            ],
+        };
+
+        // 특정 단어들을 굵게 처리할 수 있도록 배열로 지정
+        const boldWords = ["체리칩", "로모", "넹", "현재", "루나", "아마", "운영자", "플러그인 개발자", "총 관리자", "리소스팩 개발자"];
+
+        Object.keys(sections).forEach(sectionId => {
+            const sectionData = sections[sectionId];
+            const sectionDiv = document.getElementById(sectionId);
+
+            sectionData.forEach(player => {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card');
+
+                // 카드 내용
+                const textContainer = document.createElement('div');
+                textContainer.classList.add('text-container');
+
+                // 줄바꿈 처리: \n을 <br> 태그로 변환
+                let playerText = player.text.replace(/\n/g, '<br>'); // \n을 <br>로 변경
+
+                // \b가 포함되면 구분선을 추가
+                if (playerText.includes("\\b")) {
+                    playerText = playerText.replace("\\b", "<hr class='divider'>");
+                }
+
+                // boldWords 배열에 있는 단어를 찾아 <strong>로 감싸기
+                boldWords.forEach(word => {
+                    const regex = new RegExp(word, 'g'); // 해당 단어를 찾기 위한 정규식
+                    playerText = playerText.replace(regex, `<strong>${word}</strong>`); // 단어를 <strong>로 감쌈
+                });
+
+                const description = document.createElement('p');
+                description.innerHTML = playerText;  // innerHTML 사용으로 HTML 태그 적용
+                textContainer.appendChild(description);
+
+                // 카드 이미지 요청
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image-container');
+                const wallpaperPreview = document.createElement('img');
+                wallpaperPreview.src = `http://141.11.9.102:5000/get/${player.xuid}_wallpaper.png`;
+                wallpaperPreview.alt = `Wallpaper Preview for ${player.text}`;
+                wallpaperPreview.style.width = '100%';
+                wallpaperPreview.style.height = '100%';
+                imageContainer.appendChild(wallpaperPreview);
+
+                cardDiv.appendChild(imageContainer);
+                cardDiv.appendChild(textContainer);
+
+                sectionDiv.appendChild(cardDiv);
+            });
+        });
+    });
+</script>
+</body>
+</html>
