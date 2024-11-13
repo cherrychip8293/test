@@ -174,7 +174,7 @@ h2.text-center {
     font-size: 0.9rem; /* 폰트 크기 */
     padding: 40px 0 20px 0; /* 위쪽 여백 40px, 아래쪽 여백 20px */
     text-align: left;
-    position: relative; /* 푸터가 내용 끝에 맞춰지도록 설정 */
+    position: fixed; /* 푸터가 내용 끝에 맞춰지도록 설정 */
     bottom: 0; /* 화면 하단에 위치 */
     left: 0; /* 화면 왼쪽 끝에 위치 */
     width: 100%; /* 전체 너비 차지 */
@@ -312,7 +312,8 @@ h3[id] {
     }
 
     .nav-item {
-        margin-right: 540px;
+        text-align: left;
+        margin-right: auto;
     }
 
     /* 메뉴 버튼은 그대로 중앙으로 두기 */
