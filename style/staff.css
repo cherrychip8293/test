@@ -172,17 +172,8 @@ body {
 h2.text-center {
     color: white;
     font-size: 2.5rem; /* 제목 글자 크기 증가 */
-    margin-bottom: 20px; /* 아래 여백 설정 */
-    text-align: center; /* 중앙 정렬 */
-}
-
-h2.text-center-wrapper {
-    background-color: rgba(255,255,255,0.1); /* 배경색을 설정 */
-    padding: 5px 15px; /* 여백을 줄여서 컨테이너 크기 축소 */
-    border-radius: 10px; /* 둥근 모서리 */
-    margin-left: 500px;
-    display: inline-block; /* 콘텐츠 크기만큼 컨테이너 크기 자동 조정 */
-    text-align: center; /* 중앙 정렬 */
+    font-weight: bold; /* 굵게 설정 */
+    margin-bottom: 30px; /* 아래 여백 추가 */
 }
 
 .card-sections h2 {
@@ -235,11 +226,6 @@ h2.text-center-wrapper {
     }
     .card-container {
         justify-content: center; /* 모바일에서 중앙 정렬 유지 */
-    }
-    h2.text-center-wrapper {
-        margin-left: 150px;
-        text-align: center; /* 중앙 정렬 */
-        display: inline-block; /* 콘텐츠에 맞는 크기 자동 조정 */
     }
 }
 
