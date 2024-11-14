@@ -13,7 +13,7 @@ body {
     padding-top: 50px;
     flex-direction: column;
     justify-content: space-between; /* 푸터를 항상 하단에 고정 */
-    background: url('../image/background.png') no-repeat center center fixed;
+    background: url('../image/background2.png') no-repeat center center fixed;
     background-size: cover;
     color: #000; /* 글자 색 설정 */
 }
@@ -166,6 +166,7 @@ body {
 .card .text-container {
     flex: 1; /* 텍스트가 차지할 공간 비율 */
     padding-top: 10px;
+    color: white;
 }
 
 h2.text-center {
@@ -236,8 +237,7 @@ h2.text-center-wrapper {
         justify-content: center; /* 모바일에서 중앙 정렬 유지 */
     }
     h2.text-center-wrapper {
-        margin-left: 200px;
-        padding: 0; /* 패딩 제거 */
+        margin-left: 150px;
         text-align: center; /* 중앙 정렬 */
         display: inline-block; /* 콘텐츠에 맞는 크기 자동 조정 */
     }
