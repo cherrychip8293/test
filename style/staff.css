@@ -111,16 +111,6 @@ body {
     margin-top: 50px; /* 푸터와 내용 사이에 간격 추가 */
 }
 
-/* 마우스를 올렸을 때 아이콘 효과 */
-.icon-link:hover {
-    transform: scale(1.2) translateY(-10px); /* 아이콘 크기를 1.2배로 키우고 위로 10px 이동 */
-}
-
-/* 각 내용 박스에 스크롤 마진 설정 (네비게이션 바의 높이를 고려) */
-.term-box[id] {
-    scroll-margin-top: 70px; /* 네비게이션 바의 높이에 맞게 여백 추가 */
-}
-
 .card {
     width: 300px;
     height: 300px;

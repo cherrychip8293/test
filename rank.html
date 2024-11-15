@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이슬비 프로젝트</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/rank.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="image/icon.png" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto"> <!-- ms-auto를 me-auto로 변경하여 왼쪽 정렬 -->
+                <!-- 약관과 운영진 소개 드롭다운 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        운영관련
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="rule.html">서버 약관</a></li>
+                        <li><a class="dropdown-item" href="staff.html">운영진 소개</a></li>
+                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="status.html">서버 상태</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="rank.html">랭킹</a>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid-1">
+    <h1 class="page-title">돈 순위</h1>
+    
+    <div class="top-ranks" id="topRanks">
+        <!-- Top 3 ranks will be inserted here -->
+    </div>
+
+    <div class="other-ranks" id="otherRanks">
+        <!-- Ranks 4-10 will be inserted here -->
+    </div>
+</div>
+
+<!-- 푸터 -->
+<footer class="bg-dark mt-auto">
+  <div class="container-fluid p-4" id="footerContainer">
+      <p>상호명: 이슬비 프로젝트 | 사업자등록번호: 526-43-00789 | 통신판매번호: 2022-대전대덕-0460 | 대표: 백경우</p>
+      <p>&copy Copyright 2024. Cloud Studio All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function formatKoreanNumber(number) {
+            const units = ['', '만', '억', '조', '경'];
+            let result = '';
+            let num = number;
+            let unitIndex = 0;
+
+            while (num > 0 && unitIndex < units.length) {
+                const part = num % 10000;
+                if (part > 0) {
+                    result = part + units[unitIndex] + ' ' + result;
+                }
+                num = Math.floor(num / 10000);
+                unitIndex++;
+            }
+
+            return result.trim() || '0';
+        }
+
+        function loadRankings() {
+            fetch('http://localhost:5000/rankings')
+                .then(response => response.json())
+                .then(data => {
+                    const topRanks = document.getElementById('topRanks');
+                    const otherRanks = document.getElementById('otherRanks');
+                    
+                    // Clear previous content
+                    topRanks.innerHTML = '';
+                    otherRanks.innerHTML = '';
+
+                    // Process top 3 ranks
+                    const top3 = data.slice(0, 3);
+                    const rankOrder = [2, 1, 3];
+                    
+                    rankOrder.forEach(rank => {
+                        const player = top3.find(p => p.rank === rank);
+                        if (player) {
+                            const formattedAmount = formatKoreanNumber(player.amount);
+                            const card = document.createElement('div');
+                            card.className = `rank-card ${rank === 1 ? 'rank-1' : ''}`;
+                            card.innerHTML = ` 
+                                <div class="medal-icon">${rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉'}</div>
+                                <img src="https://skin.blockf.kr/get/${player.xuid}_wallpaper.png" 
+                                     alt="Player skin" 
+                                     class="player-avatar top-player-avatar"
+                                     onerror="this.src='https://skin.blockf.kr/get/default_wallpaper.png'">
+                                <div class="player-name">${player.player_name || 'Unknown Player'}</div>
+                                <div class="player-amount">${formattedAmount}</div>
+                            `;
+                            topRanks.appendChild(card);
+                        }
+                    });
+
+                    // Process ranks 4-10
+                    const others = data.slice(3, 10);
+                    others.forEach(player => {
+                        const formattedAmount = formatKoreanNumber(player.amount);
+                        const row = document.createElement('div');
+                        row.className = 'rank-row';
+                        row.innerHTML = `
+                            <div class="rank-number">${player.rank}위</div>
+                            <div class="rank-player">
+                                <img src="https://skin.blockf.kr/get/${player.xuid}_wallpaper.png" 
+                                     alt="Player skin"
+                                     onerror="this.src='https://skin.blockf.kr/get/default_wallpaper.png'">
+                                <span>${player.player_name || 'Unknown Player'}</span>
+                            </div>
+                            <div class="rank-amount">${formattedAmount}</div>
+                        `;
+                        otherRanks.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading rankings:', error);
+                    alert('순위 데이터를 불러오는데 실패했습니다.');
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadRankings);
+    </script>
+</body>
+</html>
